@@ -1,44 +1,77 @@
-import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
-
-import Colors from "@/constants/colors";
-
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import React from 'react';
+import { Tabs } from 'expo-router';
+import { colors } from '@/constants/colors';
+import { Home, BookOpen, BarChart2, Gift, User } from 'lucide-react-native';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
-        headerShown: true,
+        tabBarActiveTintColor: colors.primary,
+        tabBarInactiveTintColor: colors.gray[400],
+        tabBarStyle: {
+          borderTopWidth: 1,
+          borderTopColor: colors.gray[200],
+          height: 60,
+          paddingBottom: 8,
+          paddingTop: 8,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '500',
+        },
+        headerStyle: {
+          backgroundColor: colors.background,
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.gray[200],
+        },
+        headerTitleStyle: {
+          fontWeight: '600',
+          fontSize: 18,
+        },
+        headerTintColor: colors.text,
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors.light.text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          title: 'Home',
+          tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="(journal)"
+        options={{
+          title: 'Journal',
+          tabBarIcon: ({ color, size }) => <BookOpen size={size} color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="(insights)"
+        options={{
+          title: 'Insights',
+          tabBarIcon: ({ color, size }) => <BarChart2 size={size} color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="(rewards)"
+        options={{
+          title: 'Rewards',
+          tabBarIcon: ({ color, size }) => <Gift size={size} color={color} />,
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="(profile)"
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
+          headerShown: false,
         }}
       />
     </Tabs>
